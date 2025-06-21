@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Punto Cero - Estudio Creativo</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; margin: 0; }
+    header, footer { background: #111; color: #fff; text-align: center; padding: 1em; }
+    nav a { color: #fff; margin: 0 1em; text-decoration: none; }
+    .hero { background: #222; color: #fff; text-align: center; padding: 4em 2em; }
+    section { max-width: 1000px; margin: auto; padding: 2em; }
+    .anexo { background: #fff; margin-bottom: 4em; padding: 2em; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .anexo img { width: 100%; max-width: 400px; display: block; margin: 1em auto; border-radius: 8px; }
+    .enlaces a { display: block; color: #0066cc; margin-bottom: 0.3em; text-decoration: none; }
+    form input, form textarea, form button { width: 100%; margin-bottom: 1em; padding: 0.5em; font-size: 1em; }
+    form button { background: #222; color: #fff; border: none; cursor: pointer; }
+    iframe { width: 100%; height: 600px; border: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Punto Cero</h1>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#registro">Registro</a>
+      <a href="#agenda">Agenda</a>
+      <a href="#colectivo">Colectivo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2>Donde el Arte y la Producción se Encuentran</h2>
+    <p>Tatuajes · Grabación de Audio y Video Profesional</p>
+  </div>
+
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <ul>
+      <li><strong>Tatuajes personalizados:</strong> Diseños únicos.</li>
+      <li><strong>Grabación de Audio:</strong> Estudio profesional por hora. $500 MXN/hora.</li>
+      <li><strong>Producción de Video:</strong> Clips, documentales, reels promocionales.</li>
+      <li><strong>Community Management & Web:</strong> Presencia digital y sitios web.</li>
+    </ul>
+  </section>
+
+  <section id="registro">
+    <h2>Registro de Clientes</h2>
+    <form id="registro-form">
+      <input type="text" name="entry.1051907336" placeholder="Nombre completo" required>
+      <input type="email" name="entry.74664589" placeholder="Correo electrónico" required>
+      <input type="tel" name="entry.434101613" placeholder="Número de teléfono" pattern="[0-9]{10}" required>
+      <input type="text" name="entry.1786270651" placeholder="Servicio requerido (Tatuaje / Audio / Video / Web)" required>
+      <textarea name="entry.857049546" placeholder="Detalles adicionales o diseño deseado" required rows="4"></textarea>
+      <button type="submit">Enviar Registro</button>
+    </form>
+  </section>
+
+  <section id="agenda">
+    <h2>Agenda de Citas</h2>
+    <iframe src="https://calendar.google.com/calendar/embed?src=a7f353768237639f37bbf82ac27e3a6e1ab5ab44be324e73bc2cd4fba960aeb8%40group.calendar.google.com&ctz=America%2FChihuahua"></iframe>
+  </section>
+
+  <section id="colectivo">
+    <h2>El Colectivo Punto Cero</h2>
+
+    <div class="anexo">
+      <h3>🎧 YOSOY Studios</h3>
+      <p>Producción de audio profesional.</p>
+      <img src="https://via.placeholder.com/400x300?text=Audio+YOSOY+Studios" alt="YOSOY Studios">
+      <div class="enlaces">
+        <a href="#">Sitio web oficial →</a>
+        <a href="#">Spotify →</a>
+        <a href="#">Instagram →</a>
+      </div>
+    </div>
+
+    <div class="anexo">
+      <h3>🖋️ Big Proyect & Mafia Tattoo</h3>
+      <p>Calidad y expresión auténtica en cada trazo.</p>
+      <img src="https://via.placeholder.com/400x300?text=Tatuajes+Big+Proyect+Mafia" alt="Big Proyect & Mafia Tattoo">
+      <div class="enlaces">
+        <a href="#">Sitio web Big Proyect →</a>
+        <a href="#">Sitio web Mafia Tattoo →</a>
+        <a href="#">Instagram →</a>
+      </div>
+    </div>
+
+    <div class="anexo">
+      <h3>🎥 ZOMOZ</h3>
+      <p>Producción audiovisual, desarrollo web y marketing digital.</p>
+      <img src="https://via.placeholder.com/400x300?text=Video+Web+ZOMOZ" alt="ZOMOZ">
+      <div class="enlaces">
+        <a href="#">Sitio web oficial →</a>
+        <a href="#">YouTube →</a>
+        <a href="#">Instagram →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>📍 Dirección: Calle Creativa #123, Ciudad</p>
+    <p>📞 WhatsApp: <a href="https://wa.me/526391342577" target="_blank">+52 639 134 2577</a></p>
+    <p>📧 Email: contacto@puntocero.com</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Punto Cero · Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    document.getElementById('registro-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+
+      fetch("https://script.google.com/macros/s/AKfycbyCLGDxQ40visRFxPpzTP6b8lw7Zt-rJa6VDzNZJh3BEdSdQIV9gFhwybrOqM6no-5W/exec", {
+        method: "POST",
+        body: data
+      })
+      .then(() => {
+        alert("✅ ¡Registro enviado correctamente!");
+        window.open(`https://wa.me/526391342577?text=¡Hola! Ya envié el formulario. Mi nombre es ${data.get("entry.1051907336") } y quiero agendar.`, '_blank');
+        form.reset();
+      })
+      .catch(() => {
+        alert("❌ Hubo un error al enviar el registro.");
+      });
+    });
+  </script>
+</body>
+</html>
