@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Punto Cero - Estudio Creativo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'Urban Heroes';
+      src: url('https://raw.githubusercontent.com/FerProducer/Punto-cero-web/main/Urban%20Heroes.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    :root {
+      --color-principal: #0e0e0e;
+      --color-acento: #000;
+      --color-texto: #000;
+      --color-fondo: #fff;
+      --color-claro: #f5f5f5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.5;
+    }
+    header,
+    footer {
+      background: var(--color-principal);
+      text-align: center;
+      padding: 1.5em;
+      color: var(--color-fondo);
+    }
+    nav a {
+      color: var(--color-fondo);
+      margin: 0 1em;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: var(--color-acento);
+    }
+
+    /* Aplica Urban Heroes solo al h1 del header */
+    header h1 {
+      font-family: 'Urban Heroes', cursive, sans-serif;
+      font-weight: normal;
+    }
+
+    .hero {
+      background: var(--color-fondo);
+      color: var(--color-texto);
+      text-align: center;
+      padding: 4em 2em;
+      animation: fadeIn 2s ease-in;
+    }
+    .hero h2 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+    }
+    .hero p {
+      font-size: 1.2em;
+    }
+
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 4em 2em;
+    }
+
+    h2 {
+      color: var(--color-acento);
+      margin-bottom: 1em;
+      font-size: 2em;
+    }
+    h3 {
+      color: var(--color-principal);
+      margin-bottom: 0.5em;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 2em;
+    }
+    ul li {
+      margin-bottom: 0.5em;
+    }
+
+    .anexo {
+      background: var(--color-claro);
+      color: var(--color-principal);
+      margin-bottom: 3em;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .anexo:hover {
+      transform: translateY(-5px);
+    }
+
+    .anexo img {
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin: 1em auto;
+      border-radius: 10px;
+      object-fit: cover;
+      height: 280px;
+    }
+
+    .enlaces a {
+      display: inline-block;
+      margin-right: 1em;
+      color: var(--color-acento);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .enlaces a:hover {
+      text-decoration: underline;
+    }
+
+    form input,
+    form textarea,
+    form button,
+    form select {
+      width: 100%;
+      margin-bottom: 1em;
+      padding: 0.8em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      color: var(--color-principal);
+    }
+    form button {
+      background: var(--color-acento);
+      color: var(--color-fondo);
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    form button:hover {
+      background: #b02a38;
+      transform: scale(1.05);
+    }
+
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      border-radius: 8px;
+      opacity: 0;
+      animation: fadeInIframe 2s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    footer {
+      font-size: 0.9em;
+      color: #aaa;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInIframe {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://raw.githubusercontent.com/FerProducer/Punto-cero-web/main/Recurso%202.png" alt="Logo Punto Cero" style="height: 40px; vertical-align: middle; margin-right: 10px;" />
+    <h1 style="display: inline-block; vertical-align: middle;">Punto Cero</h1>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#registro">Registro</a>
+      <a href="#agenda">Agenda</a>
+      <a href="#colectivo">Colectivo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2>Donde el Arte y la Producción se Encuentran</h2>
+    <p>Tatuajes · Grabación de Audio y Video Profesional</p>
+  </div>
+
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <ul>
+      <li><strong>Tatuajes personalizados:</strong> Diseños únicos, trazos profesionales e higiénicos.</li>
+      <li><strong>Grabación de Audio:</strong> Estudio profesional por hora. <strong>$500 MXN/hora</strong>.</li>
+      <li><strong>Producción de Video:</strong> Clips musicales, documentales, reels, comerciales.</li>
+      <li><strong>Community Management & Web:</strong> Desarrollo de marca, redes sociales, sitios web.</li>
+    </ul>
+  </section>
+
+  <section id="registro">
+    <h2>Registro de Clientes</h2>
+    <form id="registro-form">
+      <input type="text" name="entry.1051907336" placeholder="Nombre completo" required />
+      <input type="email" name="entry.74664589" placeholder="Correo electrónico" required />
+      <input type="tel" name="entry.434101613" placeholder="Número de teléfono (10 dígitos)" pattern="[0-9]{10}" required />
+      <input type="text" name="entry.1786270651" placeholder="Servicio requerido (Tatuaje / Audio / Video / Web)" required />
+      <input type="date" name="entry.192837465" required />
+      <input type="time" name="entry.1122334455" required />
+      <select name="entry.6677889900" required>
+        <option value="" disabled selected>Duración de la sesión (horas)</option>
+        <option value="1">1 hora</option>
+        <option value="2">2 horas</option>
+        <option value="3">3 horas</option>
+      </select>
+      <textarea name="entry.857049546" placeholder="Detalles adicionales o diseño deseado" required rows="4"></textarea>
+      <button type="submit">Enviar Registro</button>
+    </form>
+  </section>
+
+  <section id="agenda">
+    <h2>Agenda de Citas</h2>
+    <iframe src="https://calendar.google.com/calendar/embed?src=a7f353768237639f37bbf82ac27e3a6e1ab5ab44be324e73bc2cd4fba960aeb8%40group.calendar.google.com&ctz=America%2FChihuahua"></iframe>
+  </section>
+
+  <section id="colectivo">
+    <h2>Colectivo Punto Cero</h2>
+    <p>Somos un colectivo creativo multidisciplinario enfocado en elevar la calidad artística y profesional de tus proyectos. Estas son nuestras áreas aliadas:</p>
+
+    <div class="anexo">
+      <h3>🎧 YOSOY Studio</h3>
+      <p>Estudio profesional de grabación y producción musical con calidad internacional.</p>
+      <img src="https://via.placeholder.com/500x280?text=YOSOY+Studio" alt="YOSOY Studio" />
+      <div class="enlaces">
+        <a href="https://www.facebook.com/profile.php?id=61559438034600" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/yosoy_studio/" target="_blank">Instagram</a>
+      </div>
+    </div>
+
+    <div class="anexo">
+      <h3>🖋️ Big Proyect & Mafia Tattoo</h3>
+      <p>Estudios de tatuaje con calidad, higiene y expresión auténtica en cada trazo artístico.</p>
+      <img src="https://via.placeholder.com/500x280?text=Big+Proyect+%26+Mafia+Tattoo" alt="Big Proyect & Mafia Tattoo" />
+      <div class="enlaces">
+        <a href="#" target="_blank">Big Proyect →</a>
+        <a href="#" target="_blank">Mafia Tattoo →</a>
+        <a href="#" target="_blank">Instagram →</a>
+      </div>
+    </div>
+
+    <div class="anexo">
+      <h3>🎥 ZOMOZ</h3>
+      <p>Producción audiovisual, desarrollo web y marketing digital. Llevamos tu proyecto al siguiente nivel.</p>
+      <img src="https://via.placeholder.com/500x280?text=ZOMOZ" alt="ZOMOZ" />
+      <div class="enlaces">
+        <a href="https://www.facebook.com/profile.php?id=100063684966273" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/zomoz_prod/" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>📍 Dirección: Calle Creativa #123, Ciudad</p>
+    <p>📞 WhatsApp: <a href="https://wa.me/526391342577" target="_blank">+52 639 134 2577</a></p>
+    <p>📧 Email: contacto@puntocero.com</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Punto Cero · Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    document.getElementById('registro-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+
+      fetch('https://script.google.com/macros/s/AKfycbyCLGDxQ40visRFxPpzTP6b8lw7Zt-rJa6VDzNZJh3BEdSdQIV9gFhwybrOqM6no-5W/exec', {
+        method: 'POST',
+        body: data,
+      })
+        .then(() => {
+          alert('✅ ¡Registro enviado correctamente!');
+          window.open(`https://wa.me/526391342577?text=¡Hola! Ya envié el formulario. Mi nombre es ${data.get('entry.1051907336')} y quiero agendar.`, '_blank');
+          form.reset();
+        })
+        .catch(() => {
+          alert('❌ Hubo un error al enviar el registro.');
+        });
+    });
+  </script>
+</body>
+</html>
