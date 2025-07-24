@@ -436,35 +436,36 @@
       input.addEventListener('input', actualizarTotal);
     });
 
-    window.enviarCotizacion = function () {
-      let mensaje = "¡Hola Punto Cero Studios! 👋Quiero una cotización con los siguientes servicios:";
-      let total = 0;
+   window.enviarCotizacion = function () {
+  let mensaje = "¡Hola Punto Cero Studios! 👋\nQuiero una cotización con los siguientes servicios:\n";
+  let total = 0;
 
-      cotizadorInputs.forEach(input => {
-        const cantidad = parseInt(input.value) || 0;
-        const precio = parseInt(input.dataset.price);
-        if (cantidad > 0) {
-          const label = input.parentElement.querySelector('label').textContent;
-          mensaje += `• ${label}: ${cantidad} x $${precio} = $${cantidad * precio}%0A`;
-          total += cantidad * precio;
-        }
-      });
+  cotizadorInputs.forEach(input => {
+    const cantidad = parseInt(input.value) || 0;
+    const precio = parseInt(input.dataset.price);
+    if (cantidad > 0) {
+      const label = input.parentElement.querySelector('label').textContent;
+      mensaje += `• ${label}: ${cantidad} x $${precio} = $${cantidad * precio}\n`;
+      total += cantidad * precio;
+    }
+  });
 
-      if (total === 0) {
-        alert('Por favor selecciona al menos un servicio para cotizar.');
-        return;
-      }
+  if (total === 0) {
+    alert('Por favor selecciona al menos un servicio para cotizar.');
+    return;
+  }
 
-      const descuento = total * 0.15;
-      const totalConDescuento = total - descuento;
+  const descuento = total * 0.15;
+  const totalConDescuento = total - descuento;
 
-      mensaje += `%0A🔻 Descuento aplicado: -$${descuento.toFixed(2)} MXN`;
-      mensaje += `%0A💳 Total con descuento: $${totalConDescuento.toFixed(2)} MXN%0A`;
-      mensaje += `%0A*Aplicable bajo principios éticos del colectivo Punto Cero`;
+  mensaje += `\n🔻 Descuento aplicado: -$${descuento.toFixed(2)} MXN`;
+  mensaje += `\n💳 Total con descuento: $${totalConDescuento.toFixed(2)} MXN`;
+  mensaje += `\n\n*Aplicable bajo principios éticos del colectivo Punto Cero.`;
 
-      const whatsappURL = `https://wa.me/5216391342577?text=${encodeURIComponent(mensaje)}`;
-      window.open(whatsappURL, "_blank");
-    };
+  const whatsappURL = `https://wa.me/5216391342577?text=${encodeURIComponent(mensaje)}`;
+  window.open(whatsappURL, "_blank");
+};
+
   });
 </script>
 
