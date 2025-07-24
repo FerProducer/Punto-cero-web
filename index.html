@@ -513,15 +513,14 @@
 <script>
   function usarCotizacion() {
     const totalTexto = document.getElementById("totalConDescuento").textContent;
-
-    // Extraer solo el número del texto (remueve $ y MXN)
     const totalNumerico = parseFloat(totalTexto.replace(/[^0-9.]/g, ""));
 
     if (!isNaN(totalNumerico) && totalNumerico > 0) {
       const inputMonto = document.getElementById("monto");
       inputMonto.value = totalNumerico;
 
-      // Abrir sección del simulador si está plegada
+      validarMonto();
+
       const simuladorSection = document.getElementById("financiamiento");
       simuladorSection.scrollIntoView({ behavior: "smooth" });
       inputMonto.focus();
@@ -533,16 +532,19 @@
   function calcularFinanciamiento() {
     const monto = parseFloat(document.getElementById("monto").value);
     const plazo = parseInt(document.getElementById("plazo").value);
-    const tasaAnual = parseFloat(document.getElementById("tasa").value);
+    let tasaAnual = parseFloat(document.getElementById("tasa").value);
 
     if (isNaN(monto) || isNaN(plazo) || isNaN(tasaAnual)) {
       alert("Por favor completa todos los campos correctamente.");
       return;
     }
 
-    const tasaMensual = tasaAnual / 12 / 100;
+    if (tasaAnual < 15) {
+      tasaAnual = 15;
+      document.getElementById("tasa").value = tasaAnual;
+    }
 
-    // Fórmula del sistema francés:
+    const tasaMensual = tasaAnual / 12 / 100;
     const mensualidad = monto * (tasaMensual / (1 - Math.pow(1 + tasaMensual, -plazo)));
     const totalPagar = mensualidad * plazo;
     const intereses = totalPagar - monto;
@@ -550,9 +552,55 @@
     document.getElementById("mensualidad").textContent = `$${mensualidad.toFixed(2)} MXN`;
     document.getElementById("total-pagar").textContent = `$${totalPagar.toFixed(2)} MXN`;
     document.getElementById("intereses").textContent = `$${intereses.toFixed(2)} MXN`;
-
     document.getElementById("resultado-financiamiento").style.display = "block";
   }
+
+  function validarMonto() {
+    const monto = parseFloat(document.getElementById("monto").value);
+    const tasa = document.getElementById("tasa");
+    const plazo = document.getElementById("plazo");
+
+    Array.from(plazo.options).forEach(opt => opt.disabled = false);
+
+    if (!isNaN(monto)) {
+      if (monto <= 5000) {
+        tasa.value = 25;
+        tasa.readOnly = true;
+        plazo.value = "3";
+        plazo.disabled = true;
+      } else {
+        tasa.readOnly = false;
+
+        // Ajustar tasa mínima y máxima válidas
+        let tasaActual = parseFloat(tasa.value);
+        if (tasaActual < 15) tasa.value = 15;
+        if (tasaActual > 25) tasa.value = 25;
+
+        plazo.disabled = false;
+
+        Array.from(plazo.options).forEach(option => {
+          const val = parseInt(option.value);
+          if (monto <= 12000 && (val === 18 || val === 24)) {
+            option.disabled = true;
+            if (plazo.value == val.toString()) plazo.value = "12";
+          }
+        });
+      }
+    }
+  }
+
+  document.getElementById("monto").addEventListener("input", validarMonto);
+
+  // Verifica también que la tasa nunca sea menor a 15 al editar manualmente
+  document.getElementById("tasa").addEventListener("input", () => {
+    const tasa = document.getElementById("tasa");
+    if (parseFloat(tasa.value) < 15) {
+      tasa.value = 15;
+    }
+    if (parseFloat(tasa.value) > 25) {
+      tasa.value = 25;
+    }
+  });
 </script>
 
 
