@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cotizador | Punto Cero Studios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f5f5f5;
+      color: #222;
+      font-family: Calibri, sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .cotizador-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .branding {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .branding h1 {
+      font-family: Impact, sans-serif;
+      font-size: 48px;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+
+    .branding h2 {
+      font-family: Calibri, sans-serif;
+      font-size: 24px;
+      font-weight: normal;
+      margin-top: -10px;
+    }
+
+    .service {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1rem 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .service label {
+      font-size: 1rem;
+    }
+
+    .service input[type="number"] {
+      width: 80px;
+      padding: 5px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.2rem;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 2rem;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #000;
+    }
+
+    .telefono {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1rem;
+    }
+
+    .telefono a {
+      color: #222;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .service {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .service input[type="number"] {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+    }
+
+    .oculto {
+      visibility: hidden;
+      position: absolute;
+      left: -9999px;
+    }
+  </style>
+</head>
+<body>
+  <div class="cotizador-container">
+    <div class="branding">
+      <h1>Punto Cero</h1>
+      <h2>Studios</h2>
+    </div>
+
+    <form id="cotizador">
+      <div class="service">
+        <label>🎙️ Grabación de Voz</label>
+        <input type="number" min="0" value="0" data-price="800">
+        <span class="oculto">$800</span>
+      </div>
+      <div class="service">
+        <label>🎸 Grabación de Instrumento</label>
+        <input type="number" min="0" value="0" data-price="600">
+        <span class="oculto">$600</span>
+      </div>
+      <div class="service">
+        <label>🎚️ Mezcla de Canción</label>
+        <input type="number" min="0" value="0" data-price="900">
+        <span class="oculto">$900</span>
+      </div>
+      <div class="service">
+        <label>🎧 Mastering</label>
+        <input type="number" min="0" value="0" data-price="700">
+        <span class="oculto">$700</span>
+      </div>
+      <div class="service">
+        <label>🎥 Video para Reels</label>
+        <input type="number" min="0" value="0" data-price="1200">
+        <span class="oculto">$1200</span>
+      </div>
+      <div class="service">
+        <label>🌐 Landing Page Promocional</label>
+        <input type="number" min="0" value="0" data-price="1500">
+        <span class="oculto">$1500</span>
+      </div>
+
+      <div class="total" id="total">Total: $0 MXN</div>
+      <button type="button" class="btn" onclick="enviarCotizacion()">Solicitar Cotización</button>
+    </form>
+
+    <div class="telefono">
+      📞 Teléfono de contacto: <a href="tel:6391342577">639 134 2577</a>
+    </div>
+  </div>
+
+  <script>
+    const inputs = document.querySelectorAll('input[type="number"]');
+    const totalDiv = document.getElementById('total');
+
+    function actualizarTotal() {
+      let total = 0;
+      inputs.forEach(input => {
+        const cantidad = parseInt(input.value) || 0;
+        const precio = parseInt(input.dataset.price);
+        total += cantidad * precio;
+      });
+      totalDiv.textContent = `Total: $${total.toLocaleString()} MXN`;
+    }
+
+    inputs.forEach(input => {
+      input.addEventListener('input', actualizarTotal);
+    });
+
+    function enviarCotizacion() {
+      let mensaje = "¡Hola Punto Cero Studios! 👋%0AQuiero una cotización con los siguientes servicios:%0A";
+      let total = 0;
+
+      inputs.forEach(input => {
+        const cantidad = parseInt(input.value) || 0;
+        const precio = parseInt(input.dataset.price);
+        if (cantidad > 0) {
+          const label = input.parentElement.querySelector('label').textContent;
+          mensaje += `• ${label}: ${cantidad} x $${precio} = $${cantidad * precio}%0A`;
+          total += cantidad * precio;
+        }
+      });
+
+      mensaje += `%0A🔢 Total: $${total} MXN%0A%0AContáctenme para más detalles.`;
+
+      const whatsappURL = `https://wa.me/5216391342577?text=${mensaje}`;
+      window.open(whatsappURL, "_blank");
+    }
+  </script>
+</body>
+</html>
