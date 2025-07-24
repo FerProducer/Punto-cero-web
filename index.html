@@ -7,6 +7,39 @@
   <link rel="icon" type="image/png" href="https://github.com/FerProducer/Punto-cero-web/blob/main/Recurso%203.png?raw=true" fill="#000" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
+    #cotizador-container .service {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#cotizador-container .service label {
+  flex: 1;
+  font-size: 1em;
+}
+
+#cotizador-container .service input[type="number"] {
+  width: 80px;
+  padding: 0.5rem;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #cotizador-container .service {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #cotizador-container .service input[type="number"] {
+    width: 100%;
+  }
+}
+
     :root {
       --color-principal: #0e0e0e;
       --color-acento: #000;
@@ -215,14 +248,65 @@
     <p> Diseño Web· Grabación de Audio y Video Profesional</p>
   </div>
 
-  <section id="servicios">
-    <h2>Servicios</h2>
-    <ul> 
-      <li><strong>Grabación de Audio:</strong> Estudio profesional por hora. <strong></li>
-      <li><strong>Producción de Video:</strong> Clips musicales, documentales, reels, comerciales.</li>
-      <li><strong>Community Management & Web:</strong> Desarrollo de marca, redes sociales, sitios web.</li>
-    </ul>
-  </section>
+ <section id="servicios">
+  <h2>Servicios</h2>
+  <ul> 
+    <li><strong>Grabación de Audio:</strong> Estudio profesional por hora.</li>
+    <li><strong>Producción de Video:</strong> Clips musicales, documentales, reels, comerciales.</li>
+    <li><strong>Community Management & Web:</strong> Desarrollo de marca, redes sociales, sitios web.</li>
+  </ul>
+
+  <button onclick="toggleCotizador()" style="margin: 1em 0; padding: 1em; background: #000; color: #fff; border: none; border-radius: 8px; width: 100%; font-weight: bold; font-size: 1em; cursor: pointer;">
+    📋 Cotizar un Proyecto
+  </button>
+
+  <div id="cotizador-container" style="display:none; background:#fff; padding:2rem; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:800px; margin:auto;">
+    <h3 style="font-family:Impact, sans-serif; letter-spacing:0.5px; font-size:2em; margin-bottom:0.2em;">Punto Cero</h3>
+    <h4 style="font-family:Calibri, sans-serif; font-size:1.2em; font-weight:normal; margin-bottom:1.5em;">Bienvenido - Cotizador Online</h4>
+
+    <form id="cotizador-form">
+      <div class="service">
+        <label>🎙️ Grabación de Voz</label>
+        <input type="number" min="0" value="0" data-price="800" />
+      </div>
+      <div class="service">
+        <label>🎸 Grabación de Instrumento</label>
+        <input type="number" min="0" value="0" data-price="600" />
+      </div>
+      <div class="service">
+        <label>🎚️ Mezcla de Canción</label>
+        <input type="number" min="0" value="0" data-price="900" />
+      </div>
+      <div class="service">
+        <label>🎧 Mastering</label>
+        <input type="number" min="0" value="0" data-price="700" />
+      </div>
+      <div class="service">
+        <label>🎼 Beat Making</label>
+        <input type="number" min="0" value="0" data-price="1000" />
+      </div>
+      <div class="service">
+        <label>🎥 Video para Reels</label>
+        <input type="number" min="0" value="0" data-price="1200" />
+      </div>
+      <div class="service">
+        <label>🌐 Landing Page Promocional</label>
+        <input type="number" min="0" value="0" data-price="1500" />
+      </div>
+
+      <div id="total-cotizacion" style="text-align:right; font-weight:bold; font-size:1.2em; margin-top:1.5rem;">
+        Total: $0 MXN
+      </div>
+
+      <button type="button" onclick="enviarCotizacion()" style="margin-top:2rem; background:#000; color:#fff; border:none; padding:1rem; width:100%; border-radius:8px; font-weight:bold; cursor:pointer;">Solicitar Cotización vía WhatsApp</button>
+
+      <p style="text-align:center; font-size:0.9em; margin-top:1rem;">
+        📞 Teléfono directo: <a href="tel:6141674436">614 167 4436</a>
+      </p>
+    </form>
+  </div>
+</section>
+
 
   <section id="registro">
     <h2>Registro de Clientes</h2>
@@ -270,7 +354,6 @@
     </div>
   </section>
   
-<a href="cotizador.html"><strong>Cotizador</strong></a>
 
   <section id="contacto">
      Enviar vía WhatsApp
@@ -311,7 +394,48 @@
     </svg>
   </a>
 
-  <script>
+ <script>
+  function toggleCotizador() {
+    const cont = document.getElementById('cotizador-container');
+    cont.style.display = cont.style.display === 'none' ? 'block' : 'none';
+  }
+
+  const cotizadorInputs = document.querySelectorAll('#cotizador-form input[type="number"]');
+  const totalCotizador = document.getElementById('total-cotizacion');
+
+  cotizadorInputs.forEach(input => {
+    input.addEventListener('input', () => {
+      let total = 0;
+      cotizadorInputs.forEach(i => {
+        const cant = parseInt(i.value) || 0;
+        const precio = parseInt(i.dataset.price);
+        total += cant * precio;
+      });
+      totalCotizador.textContent = `Total: $${total.toLocaleString()} MXN`;
+    });
+  });
+
+  function enviarCotizacion() {
+    let mensaje = "¡Hola Punto Cero Studios! 👋%0AQuiero una cotización con los siguientes servicios:%0A";
+    let total = 0;
+
+    cotizadorInputs.forEach(input => {
+      const cantidad = parseInt(input.value) || 0;
+      const precio = parseInt(input.dataset.price);
+      if (cantidad > 0) {
+        const label = input.parentElement.querySelector('label').textContent;
+        mensaje += `• ${label}: ${cantidad} x $${precio} = $${cantidad * precio}%0A`;
+        total += cantidad * precio;
+      }
+    });
+
+    mensaje += `%0A🔢 Total: $${total} MXN%0A%0AEspero su respuesta.`;
+
+    const whatsappURL = `https://wa.me/5216141674436?text=${mensaje}`;
+    window.open(whatsappURL, "_blank");
+  }
+</script>
+ <script>
     document.getElementById('registro-form').addEventListener('submit', function (e) {
       e.preventDefault();
       const form = e.target;
@@ -331,5 +455,6 @@
         });
     });
   </script>
+
 </body>
 </html>
